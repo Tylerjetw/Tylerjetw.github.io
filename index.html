@@ -1,27 +1,615 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Tyler Smith Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tyler Smith | Cybersecurity Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0b1120;
+      --card: #111827;
+      --card-light: #1f2937;
+      --text: #f9fafb;
+      --muted: #cbd5e1;
+      --accent: #38bdf8;
+      --accent-2: #22c55e;
+      --border: rgba(148, 163, 184, 0.22);
+      --shadow: rgba(0, 0, 0, 0.35);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.22), transparent 30%),
+        radial-gradient(circle at top right, rgba(34, 197, 94, 0.12), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(11, 17, 32, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      padding: 88px 0 64px;
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 0.5rem;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.35rem 0.75rem;
+      background: rgba(17, 24, 39, 0.75);
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 1.3rem;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent-2);
+      box-shadow: 0 0 16px rgba(34, 197, 94, 0.8);
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      line-height: 1;
+      letter-spacing: -0.06em;
+      margin-bottom: 1.2rem;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-top: 1.4rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.8rem 1.05rem;
+      border-radius: 12px;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #2563eb);
+      color: white;
+      border: none;
+    }
+
+    .btn-secondary {
+      background: rgba(17, 24, 39, 0.75);
+      color: var(--text);
+    }
+
+    .hero-card {
+      background: rgba(17, 24, 39, 0.78);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 1.4rem;
+      box-shadow: 0 24px 70px var(--shadow);
+    }
+
+    .hero-card h2 {
+      font-size: 1rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .quick-list {
+      list-style: none;
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .quick-list li {
+      padding: 0.9rem;
+      border-radius: 16px;
+      background: rgba(31, 41, 55, 0.72);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .quick-list strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+
+    section {
+      padding: 56px 0;
+    }
+
+    .section-heading {
+      margin-bottom: 1.6rem;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      letter-spacing: -0.03em;
+      margin-bottom: 0.35rem;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .card {
+      background: rgba(17, 24, 39, 0.78);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 1.35rem;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.55rem;
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .card ul {
+      padding-left: 1.1rem;
+      margin-top: 0.7rem;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 0.95rem;
+    }
+
+    .tag {
+      border: 1px solid var(--border);
+      background: rgba(31, 41, 55, 0.75);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 0.32rem 0.65rem;
+      font-size: 0.84rem;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 1rem;
+      padding: 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: rgba(17, 24, 39, 0.78);
+    }
+
+    .timeline-date {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .timeline-item h3 {
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-item p {
+      color: var(--muted);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .contact-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding: 1.4rem;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.13), rgba(34, 197, 94, 0.1));
+    }
+
+    .contact-box p {
+      color: var(--muted);
+      max-width: 680px;
+    }
+
+    footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .grid,
+      .skills-grid,
+      .timeline-item {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 1rem 0;
+      }
+
+      .hero {
+        padding-top: 56px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Tyler Smith</h1>
-  <p>Cybersecurity student interested in networking, security tools, and server/homelab projects.</p>
+  <header>
+    <div class="container">
+      <nav>
+        <a class="logo" href="#top">Tyler<span>Smith</span></a>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-  <h2>Projects</h2>
+  <main id="top">
+    <div class="container hero">
+      <div>
+        <div class="eyebrow"><span class="status-dot"></span> Cybersecurity Student • Server Debug Technician • Homelab Builder</div>
+        <h1>Building practical experience in <span class="gradient-text">cybersecurity, servers, and networking.</span></h1>
+        <p>
+          I am a Cybersecurity student at Northern Kentucky University and currently work at Jabil, where I debug, test, and troubleshoot server systems for Fortune 500 customers. My background combines hands-on server work, Linux administration, networking fundamentals, cabling, scripting, and customer-focused leadership experience.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#projects">View Projects</a>
+          <a class="btn btn-secondary" href="resume.pdf" target="_blank">View Resume</a>
+          <a class="btn btn-secondary" href="mailto:tylermsmith14@icloud.com">Contact Me</a>
+        </div>
+      </div>
 
-  <h3>Homelab Server</h3>
-  <p>Set up an Ubuntu server for Jellyfin, storage, Docker containers, and remote access.</p>
+      <aside class="hero-card">
+        <h2>Current Focus</h2>
+        <ul class="quick-list">
+          <li><strong>Server Debugging</strong>Testing hardware, cabling, network connectivity, logs, and system-level failures.</li>
+          <li><strong>Cybersecurity</strong>Studying security concepts, Linux, networking, scripting, and hands-on tools.</li>
+          <li><strong>Homelab</strong>Running a headless Ubuntu server with Docker services, storage, and remote administration.</li>
+        </ul>
+      </aside>
+    </div>
 
-  <h3>Cybersecurity Labs</h3>
-  <p>Used tools like Nmap, Wireshark, Bandit, and Snort for security analysis and testing.</p>
+    <section id="about">
+      <div class="container">
+        <div class="section-heading">
+          <h2>About Me</h2>
+          <p>
+            I like learning by actually building, breaking, fixing, and documenting systems. My experience has moved from retail leadership and hands-on construction work into network cabling, Linux server administration, cybersecurity coursework, and server testing at Jabil.
+          </p>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <h3>Hands-on Technical Background</h3>
+            <p>I have worked with Ubuntu Server, Docker, SSH, external storage, basic networking, HTML/CSS/JavaScript, Java, Python, and SQL.</p>
+          </div>
+          <div class="card">
+            <h3>Real Troubleshooting Experience</h3>
+            <p>At Jabil, I work with server systems where careful testing, clear documentation, and methodical troubleshooting matter every day.</p>
+          </div>
+          <div class="card">
+            <h3>Leadership Foundation</h3>
+            <p>My retail management experience helped me build communication, accountability, training, scheduling, documentation, and problem-solving skills.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <h3>GitHub Portfolio</h3>
-  <p>Created this portfolio using GitHub Pages to showcase my technical work.</p>
+    <section id="experience">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Experience</h2>
+          <p>My work history gives me a mix of technical, operational, and leadership experience.</p>
+        </div>
 
-  <h2>Skills</h2>
-  <p>Linux, Windows, networking, GitHub, Docker, Wireshark, Nmap, basic scripting, troubleshooting.</p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">Current</div>
+            <div>
+              <h3>Server Debug Technician • Jabil</h3>
+              <p>Debug and test server systems for Fortune 500 companies. Troubleshoot hardware issues, cabling problems, power issues, connectivity failures, system errors, logs, and server-level faults after rack assembly.</p>
+              <div class="tag-row">
+                <span class="tag">Server Testing</span>
+                <span class="tag">Hardware Debugging</span>
+                <span class="tag">Networking</span>
+                <span class="tag">Troubleshooting</span>
+              </div>
+            </div>
+          </div>
 
-  <h2>Contact</h2>
-  <p>Email: your-email-here</p>
+          <div class="timeline-item">
+            <div class="timeline-date">2023 - Present</div>
+            <div>
+              <h3>Administrative Coordinator / Key Carrier • TJX Companies</h3>
+              <p>Oversee daily operations, opening and closing procedures, scheduling, documentation, supply ordering, cash handling, associate training, compliance support, and escalated customer concerns.</p>
+              <div class="tag-row">
+                <span class="tag">Leadership</span>
+                <span class="tag">Documentation</span>
+                <span class="tag">Operations</span>
+                <span class="tag">Training</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Summer 2024</div>
+            <div>
+              <h3>Data Cable Technician • Application Services Inc.</h3>
+              <p>Installed, terminated, and tested Cat6 and Cat6a cabling in commercial construction environments. Used cable testers to verify network integrity and support infrastructure standards.</p>
+              <div class="tag-row">
+                <span class="tag">Cat6/Cat6a</span>
+                <span class="tag">Cable Testing</span>
+                <span class="tag">Infrastructure</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2023 - 2024</div>
+            <div>
+              <h3>Construction Worker • Lawler’s Builders</h3>
+              <p>Worked on residential construction and remodeling projects including building houses, bathroom renovation, tile installation, and hardwood flooring.</p>
+              <div class="tag-row">
+                <span class="tag">Hands-on Work</span>
+                <span class="tag">Problem Solving</span>
+                <span class="tag">Detail Work</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Projects</h2>
+          <p>These projects show the kind of work I am building experience in: servers, networking, cybersecurity, scripting, and web development.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <h3>Ubuntu Homelab Server</h3>
+            <p>Installed and configured a headless Ubuntu Server for remote administration, centralized storage, Docker services, and media hosting.</p>
+            <ul>
+              <li>Managed the server over SSH from a separate PC.</li>
+              <li>Mounted and managed external storage drives.</li>
+              <li>Deployed Docker-based services for personal use.</li>
+            </ul>
+            <div class="tag-row">
+              <span class="tag">Ubuntu Server</span>
+              <span class="tag">Docker</span>
+              <span class="tag">SSH</span>
+              <span class="tag">Storage</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Dynamic eCommerce Website</h3>
+            <p>Built a responsive eCommerce platform using HTML, CSS, and JavaScript with dynamic API-driven product data.</p>
+            <ul>
+              <li>Fetched product data from an API.</li>
+              <li>Rendered categories and item detail views.</li>
+              <li>Organized a clean user-facing shopping layout.</li>
+            </ul>
+            <div class="tag-row">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">API</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Cybersecurity Coursework & Labs</h3>
+            <p>Completed hands-on labs using security and networking tools to understand scanning, traffic analysis, system hardening, and secure coding basics.</p>
+            <ul>
+              <li>Worked with tools such as Wireshark, Nmap, Bandit, Snort, and Linux utilities.</li>
+              <li>Practiced troubleshooting, documentation, and security analysis.</li>
+              <li>Built stronger understanding of networks, systems, and common attack paths.</li>
+            </ul>
+            <div class="tag-row">
+              <span class="tag">Wireshark</span>
+              <span class="tag">Nmap</span>
+              <span class="tag">Linux</span>
+              <span class="tag">Security Tools</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Technical Skills</h2>
+          <p>A practical mix of tools, systems, and fundamentals I have used through school, work, and personal projects.</p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="card">
+            <h3>Operating Systems</h3>
+            <p>Ubuntu Server, Linux command line, Windows, remote administration</p>
+          </div>
+          <div class="card">
+            <h3>Networking</h3>
+            <p>TCP/IP basics, subnetting, cabling, cable testing, connectivity troubleshooting</p>
+          </div>
+          <div class="card">
+            <h3>Programming</h3>
+            <p>Python, Java, SQL, HTML, CSS, JavaScript</p>
+          </div>
+          <div class="card">
+            <h3>Tools</h3>
+            <p>Docker, SSH, Git, VirtualBox, Wireshark, Nmap, Bandit, Snort</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Education</h2>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <h3>Northern Kentucky University</h3>
+            <p>Bachelor of Science in Cybersecurity</p>
+            <p>Expected December 2026</p>
+          </div>
+          <div class="card">
+            <h3>Campbellsville High School</h3>
+            <p>High School Diploma</p>
+            <p>Graduated Summa Cum Laude</p>
+          </div>
+          <div class="card">
+            <h3>Certification</h3>
+            <p>IC3 Certification</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <div>
+            <h2>Let’s Connect</h2>
+            <p>I am interested in cybersecurity, server hardware, networking, Linux administration, and hands-on technical roles where I can keep improving my troubleshooting skills.</p>
+          </div>
+          <div class="actions">
+            <a class="btn btn-primary" href="mailto:tylermsmith14@icloud.com">Email Me</a>
+            <a class="btn btn-secondary" href="resume.pdf" target="_blank">Resume</a>
+            <a class="btn btn-secondary" href="https://github.com/YOUR-GITHUB-USERNAME" target="_blank">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Tyler Smith. Built with HTML and CSS, hosted on GitHub Pages.</p>
+    </div>
+  </footer>
 </body>
 </html>
